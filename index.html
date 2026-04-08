@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Le quart d'heure Marseillais — Visites guidées</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Literata:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --jaune:   #F5C518;
+      --jaune-p: #E8B400;
+      --bleu:    #1B4F8A;
+      --bleu-c:  #2A6FC4;
+      --blanc:   #FFFDF5;
+      --texte:   #0F2744;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--blanc);
+      color: var(--texte);
+      font-family: 'Literata', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--bleu);
+    }
+
+    /* soleil animé en fond */
+    .sun {
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%,
+        var(--jaune) 0%,
+        rgba(245,197,24,0.4) 50%,
+        transparent 72%);
+      top: -120px; right: -120px;
+      animation: sunpulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes sunpulse {
+      0%,100% { transform: scale(1); opacity: .85; }
+      50%      { transform: scale(1.06); opacity: 1; }
+    }
+
+    /* vagues basses */
+    .waves {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 110px;
+      overflow: hidden;
+    }
+    .waves svg { display: block; width: 100%; height: 100%; }
+
+    .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--texte);
+      background: var(--jaune);
+      padding: .35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 1;
+      color: #fff;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    h1 span {
+      color: var(--jaune);
+      display: block;
+    }
+
+    .sous-titre {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,.65);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.8);
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--jaune);
+      color: var(--texte);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      transition: background .2s, transform .15s;
+    }
+    .btn:hover { background: var(--jaune-p); transform: translateY(-2px); }
+
+    /* ── PARCOURS ── */
+    .section {
+      padding: 6rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .label {
+      font-family: 'Syne', sans-serif;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--bleu-c);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--jaune);
+      max-width: 60px;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      color: var(--texte);
+      margin-bottom: 3rem;
+    }
+
+    .card-parcours {
+      border: 2px solid var(--jaune);
+      border-radius: 4px;
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      background: #fff;
+      box-shadow: 6px 6px 0 var(--jaune);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-left h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: .6rem;
+      color: var(--texte);
+    }
+    .card-left p {
+      font-size: .95rem;
+      line-height: 1.7;
+      color: var(--texte);
+      opacity: .7;
+      max-width: 420px;
+    }
+    .card-meta {
+      display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;
+    }
+    .chip {
+      font-family: 'Syne', sans-serif;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border-radius: 2px;
+    }
+    .chip-bleu { background: var(--bleu); color: #fff; }
+    .chip-jaune { background: var(--jaune); color: var(--texte); }
+
+    .card-price {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .card-price .amount {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--bleu);
+      line-height: 1;
+    }
+    .card-price .unit {
+      font-size: .78rem;
+      opacity: .55;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .coming-soon {
+      border: 2px dashed rgba(27,79,138,.2);
+      border-radius: 4px;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: var(--texte);
+      opacity: .55;
+    }
+    .coming-soon .icon {
+      width: 2.5rem; height: 2.5rem; flex-shrink: 0;
+      border-radius: 50%;
+      border: 2px dashed currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .coming-soon p {
+      font-family: 'Syne', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .05em;
+    }
+
+    /* ── CALENDRIER ── */
+    .cal-section {
+      background: var(--bleu);
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cal-section::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,197,24,.2), transparent 70%);
+      pointer-events: none;
+    }
+    .cal-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .cal-section .label { color: var(--jaune); }
+    .cal-section .label::after { background: rgba(255,255,255,.2); }
+    .cal-section h2 { color: #fff; margin-bottom: 2.5rem; }
+
+    /* placeholder cal.com */
+    .cal-placeholder {
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.15);
+      border-radius: 4px;
+      padding: 5rem 2rem;
+      text-align: center;
+      color: rgba(255,255,255,.5);
+    }
+    .cal-placeholder .cal-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .cal-placeholder p {
+      font-family: 'Syne', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .cal-placeholder small {
+      font-size: .78rem;
+      opacity: .6;
+      font-style: italic;
+      font-family: 'Literata', serif;
+    }
+
+    /* ── GUILLEMETTE ── */
+    .guide-section {
+      padding: 6rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .guide-photo {
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--jaune) 0%, rgba(245,197,24,.3) 100%);
+      border-radius: 4px;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(27,79,138,.4);
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .guide-photo::after {
+      content: '';
+      position: absolute;
+      top: 1rem; right: -1rem; bottom: -1rem; left: 1rem;
+      border: 2px solid var(--bleu);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .guide-text .label { color: var(--bleu-c); }
+    .guide-text h2 { margin-bottom: 1.2rem; }
+    .guide-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      opacity: .75;
+      margin-bottom: 1rem;
+    }
+    .guide-name {
+      font-family: 'Literata', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--bleu);
+      margin-top: 1.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--texte);
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-family: 'Syne', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .08em;
+    }
+    footer strong { color: var(--jaune); font-weight: 600; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .card-parcours { flex-direction: column; }
+      .card-price { text-align: left; }
+      .guide-section { grid-template-columns: 1fr; }
+      .guide-photo { aspect-ratio: 4/3; }
+    }
+
+    /* ── FADE IN ── */
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade.on { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="sun"></div>
+  <div class="hero-inner">
+    <div class="badge">Marseille · Visites guidées</div>
+    <div class="sous-titre">Visites guidées</div>
+    <h1>Le quart d'heure<span>Marseillais</span></h1>
+    <p class="hero-desc">
+      Découvrez Marseille autrement — ses ruelles, ses secrets<br>et la lumière incomparable du Vieux-Port.
+    </p>
+    <a href="#reserver" class="btn">Réserver une visite</a>
+  </div>
+  <div class="waves">
+    <svg viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 C240,110 480,10 720,60 C960,110 1200,20 1440,60 L1440,110 L0,110 Z" fill="#FFFDF5" opacity=".12"/>
+      <path d="M0,80 C300,30 600,110 900,70 C1100,45 1300,90 1440,75 L1440,110 L0,110 Z" fill="#FFFDF5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ PARCOURS ══ -->
+<section class="section fade" id="parcours">
+  <div class="label">Nos parcours</div>
+  <h2>Choisissez<br>votre aventure</h2>
+
+  <div class="card-parcours">
+    <div class="card-left">
+      <h3>Le Panier en 2h</h3>
+      <p>Partez à la découverte du plus vieux quartier de Marseille — ses ruelles colorées, la cathédrale de la Major, les jardins secrets et les terrasses avec vue sur la mer.</p>
+      <div class="card-meta">
+        <span class="chip chip-bleu">⏱ 2 heures</span>
+        <span class="chip chip-jaune">À pied</span>
+        <span class="chip chip-bleu">Jusqu'à 12 pers.</span>
+      </div>
+    </div>
+    <div class="card-price">
+      <div class="amount">30€</div>
+      <div class="unit">/ personne</div>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="icon">+</div>
+    <p>D'autres parcours arrivent bientôt — gastronomie, calanques, histoire…</p>
+  </div>
+</section>
+
+<!-- ══ CALENDRIER ══ -->
+<section class="cal-section" id="reserver">
+  <div class="cal-inner">
+    <div class="label">Réservation</div>
+    <h2>Choisissez<br>votre créneau</h2>
+
+    <div style="width:100%;height:700px;overflow:scroll" id="my-cal-inline"></div>
+    <script type="text/javascript">
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", {origin:"https://cal.com"});
+      Cal("inline", {
+        elementOrSelector:"#my-cal-inline",
+        calLink: "guillemette-bouzereau-0tqjul",
+        layout: "month_view"
+      });
+      Cal("ui", {
+        styles: { branding: { brandColor: "#F5C518" } },
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+    </script>
+  </div>
+</section>
+
+<!-- ══ GUILLEMETTE ══ -->
+<section class="guide-section fade">
+  <div class="guide-photo">Votre photo</div>
+  <div class="guide-text">
+    <div class="label">Votre guide</div>
+    <h2>Bonjour,<br>je suis Guillemette</h2>
+    <p>
+      Marseillaise depuis toujours, je vous fais découvrir ma ville avec la passion et l'authenticité qu'elle mérite. Pas de circuit imposé, pas de clichés — juste la vraie Marseille.
+    </p>
+    <p>
+      Plus d'informations à venir très prochainement.
+    </p>
+    <div class="guide-name">Guillemette</div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <strong>Le quart d'heure Marseillais</strong> · Visites guidées à Marseille<br>
+  <span style="font-size:.72rem; margin-top:.5rem; display:block;">© 2026 — Tous droits réservés</span>
+</footer>
+
+<script>
+  // Fade in au scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Scroll doux vers #reserver
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
