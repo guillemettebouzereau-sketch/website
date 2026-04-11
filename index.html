@@ -43,7 +43,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 2rem;
+      padding: .8rem 2rem;
       background: rgba(255,248,231,.9);
       backdrop-filter: blur(4px);
       border-bottom: 1px solid rgba(0,0,0,.08);
@@ -122,7 +122,7 @@
         backdrop-filter: blur(4px);
         border-top: 1px solid rgba(0,0,0,.08);
         flex-direction: column;
-        padding: 1.5rem 2rem;
+        padding: .8rem 2rem;
         gap: 1.2rem;
       }
 
@@ -182,13 +182,7 @@
       position: relative;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,.1);
-      mix-blend-mode: soft-light;
-    }
+
 
     h1 {
       font-family: 'Syne', sans-serif;
@@ -199,13 +193,13 @@
 
     h1 span {
       display: block;
-      color: white;
+      color: #1a2e4a;
     }
 
     .hero-desc {
       margin-bottom: 2.5rem;
       font-style: italic;
-      color: rgba(0,0,0,.65);
+      color: rgba(0,0,0,.85);
       max-width: 500px;
     }
 
@@ -304,14 +298,11 @@
 <body>
 
 <header>
-  <div class="logo" style="display:flex; align-items:center; gap:.8rem;">
-    <div style="width:52px; height:52px; border-radius:50%; background:#f7bd2d; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
-      <img src="logo.png" alt="Logo Le quart d'heure Marseillais" style="width:80%; height:80%; object-fit:contain; filter:invert(1);">
+  <div class="logo" style="display:flex; align-items:center; gap:1rem;">
+    <div style="width:90px; height:90px; border-radius:50%; background:#f7bd2d; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
+      <img src="logo.png" alt="Logo Le quart d'heure Marseillais" style="width:82%; height:82%; object-fit:contain; filter:invert(1);">
     </div>
-    <div>
-      Le quart d'heure Marseillais
-      <div style="font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; margin-top:.2rem;">Visites guidées</div>
-    </div>
+    <img src="titre.png" alt="Le quart d'heure Marseillais" style="height:44px; width:auto; filter:invert(48%) sepia(60%) saturate(400%) hue-rotate(180deg) brightness(60%);">
   </div>
   <nav>
     <a href="#parcours">Les parcours</a>
@@ -386,7 +377,7 @@
     <div class="section-icon" id="icone-guide">
       <div class="icone-cercle"><img src="sardine.png" alt="" aria-hidden="true"></div>
     </div>
-    <h2>Guillemette</h2>
+    <h2>Guillemette <span style="color:#f7bd2d; font-family:'Syne', sans-serif;">?</span></h2>
     <p>Après une enfance sous le soleil de Marseille, j'ai étudié l'histoire de l'Art à l'École du Louvre et à La Sorbonne. Je vous emmène visiter mon Marseille : chargé d'histoire et de patrimoine, mais surtout authentique et chaleureux.</p>
   </div>
 </section>
