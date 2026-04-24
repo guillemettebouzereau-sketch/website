@@ -142,7 +142,7 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: white;
+      background: var(--jaune-soleil);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -153,6 +153,7 @@
       width: 85%;
       height: 85%;
       object-fit: contain;
+      filter: invert(1);
     }
     .hero-icone:nth-child(1) { animation: dropIn .6s ease forwards; animation-delay: 1s; }
     .hero-icone:nth-child(2) { animation: dropIn .6s ease forwards; animation-delay: 1.3s; }
@@ -209,6 +210,26 @@
       padding: 8rem 2rem 5rem;
       background: var(--jaune-soleil);
       position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('IMG_1774.JPG');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .hero-desc {
+      color: rgba(255,255,255,.9);
     }
 
 
@@ -419,7 +440,8 @@
 </header>
 
 <section class="hero">
-  <img src="titre.png" alt="Le quart d'heure Marseillais" class="hero-titre" style="width: clamp(280px, 55vw, 620px); filter: invert(1); margin-bottom: 1rem;">
+  <div class="hero-bg"></div>
+  <img src="titre.png" alt="Le quart d'heure Marseillais" class="hero-titre" style="width: clamp(280px, 55vw, 620px); filter: brightness(0) invert(1); margin-bottom: 1rem;">
   <p class="hero-desc">Découvrez Marseille autrement — lumineux, vivant, solaire.</p>
   <div class="hero-icons">
     <div class="hero-icon"><img src="bonne_mere.png" alt="Notre-Dame de la Garde"></div>
@@ -460,6 +482,15 @@
     <div class="price">30€ / personne</div>
   </div>
 </section>
+
+
+<!-- BANDEAU PHOTO PLEIN LARGEUR -->
+<div style="width:100%; height:480px; overflow:hidden; position:relative;">
+  <img src="IMG_0549.JPG" alt="Calanque de Marseille" style="width:100%; height:100%; object-fit:cover; object-position:center 60%;">
+  <div style="position:absolute; inset:0; background:rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center;">
+    <p style="color:white; font-family:'Syne',sans-serif; font-size:clamp(1.2rem,3vw,2rem); letter-spacing:.2em; text-transform:uppercase; text-align:center;">Marseille â 2 600 ans d’histoire</p>
+  </div>
+</div>
 
 <section class="cal-section" id="reserver">
   <!-- ICÔNE : section Réserver -->
