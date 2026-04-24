@@ -10,446 +10,406 @@
 
     :root {
       --jaune: #f7bd2d;
-      --jaune-soleil: #f7bd2d;
       --bleu: #7bacca;
-      --blanc: #ffffff;
-      --texte: #5a8aaa;
+      --bleu-fonce: #2a4a6b;
+      --texte: #1a2e3b;
+      --gris: #f7f7f5;
     }
 
     body {
-      background: var(--blanc);
+      background: white;
       color: var(--texte);
       font-family: 'Literata', Georgia, serif;
       line-height: 1.7;
     }
 
-
-
-    /* HEADER */
+    /* ── HEADER ── */
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 3rem;
-      background: rgba(255,255,255,.96);
+      padding: .8rem 3rem;
+      background: rgba(255,252,235,.97);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0,0,0,.06);
+      border-bottom: 1px solid rgba(0,0,0,.07);
       z-index: 1000;
     }
 
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      color: var(--bleu);
+    .logo-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .logo div {
-      opacity: .6;
-      font-style: italic;
+    .logo-cercle {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--jaune);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
     }
+
+    .logo-cercle img {
+      width: 115%; height: 115%;
+      object-fit: contain;
+      filter: invert(1);
+    }
+
+    nav { display: flex; align-items: center; }
 
     nav a {
-      margin-left: 1.8rem;
+      margin-left: .6rem;
       text-decoration: none;
       font-family: 'Syne', sans-serif;
-      font-size: .75rem;
-      letter-spacing: .1em;
+      font-size: .72rem;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      color: #333;
-      position: relative;
+      color: var(--bleu-fonce);
       display: inline-flex;
       align-items: center;
-      gap: .3rem;
+      gap: .35rem;
+      padding: .5rem 1rem;
+      border-radius: 30px;
+      border: 1.5px solid rgba(123,172,202,.35);
+      background: rgba(255,255,255,.8);
+      transition: background .2s, border-color .2s, color .2s;
     }
-    nav a:hover { color: var(--bleu); }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 1px;
-      background: var(--bleu);
-      transition: width .2s;
+    nav a:hover {
+      background: var(--jaune);
+      border-color: var(--jaune);
+      color: var(--bleu-fonce);
+    }
+    nav a:last-child {
+      border-color: transparent;
+      background: transparent;
+      opacity: .55;
     }
 
-    nav a:hover::after { width: 100%; }
+    .nav-icone {
+      width: 18px; height: 18px;
+      object-fit: contain;
+    }
 
+    /* hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 24px;
-      height: 18px;
+      width: 24px; height: 18px;
       cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
+      background: none; border: none; padding: 0;
     }
-
     .hamburger span {
-      display: block;
-      height: 2px;
-      background: var(--bleu);
-      border-radius: 2px;
+      display: block; height: 2px;
+      background: var(--texte); border-radius: 2px;
       transition: all .3s;
     }
-
     .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-    @media(max-width:700px){
+    @media(max-width:800px){
       .hamburger { display: flex; }
-
       nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(255,248,231,.97);
-        backdrop-filter: blur(4px);
-        border-top: 1px solid rgba(0,0,0,.08);
+        display: none; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(255,255,255,.98);
+        border-top: 1px solid rgba(0,0,0,.07);
         flex-direction: column;
-        padding: 1rem 2rem;
-        gap: 1.2rem;
+        padding: 1.5rem 2rem; gap: 1.2rem;
       }
-
       nav.open { display: flex; }
-
-      nav a {
-        margin-left: 0;
-        font-size: 1rem;
-      }
+      nav a { margin-left: 0; font-size: 1rem; }
     }
 
-
-    /* ICÔNES HERO */
-    .hero-icones {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      align-items: center;
-      margin-top: 2rem;
-    }
-    .hero-icone {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--jaune-soleil);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      opacity: 0;
-    }
-    .hero-icone img {
-      width: 85%;
-      height: 85%;
-      object-fit: contain;
-      filter: invert(1);
-    }
-    .hero-icone:nth-child(1) { animation: dropIn .6s ease forwards; animation-delay: 1s; }
-    .hero-icone:nth-child(2) { animation: dropIn .6s ease forwards; animation-delay: 1.3s; }
-    .hero-icone:nth-child(3) { animation: dropIn .6s ease forwards; animation-delay: 1.6s; }
-    .hero-icone:nth-child(4) { animation: dropIn .6s ease forwards; animation-delay: 1.9s; }
-    /* ICÔNES NAV */
-    .nav-icone {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      vertical-align: middle;
-      margin-right: .4rem;
-    }
-    /* ICÔNES SECTIONS */
-    .section-icon {
-      margin-bottom: 1.5rem;
-    }
-
-    .section-icon .icone-cercle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: #f7bd2d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .section-icon .icone-cercle img {
-      width: 70%;
-      height: 70%;
-      object-fit: contain;
-      filter: invert(1);
-    }
-
-    /* Sur fond bleu (section réserver), cercle blanc */
-    .cal-section .section-icon .icone-cercle {
-      background: white;
-    }
-
-    .cal-section .section-icon .icone-cercle img {
-      filter: invert(0);
-    }
-
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 9rem 3rem 5rem;
       text-align: center;
-      padding: 8rem 2rem 5rem;
-      background: var(--jaune-soleil);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(160deg, #fffbe8 0%, #fff3c0 60%, #ffe680 100%);
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('IMG_1774.JPG');
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.5);
-      z-index: 0;
-    }
-
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero .hero-desc {
-      color: rgba(255,255,255,.9);
-    }
-
-
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      color: var(--bleu);
-      margin-bottom: 1rem;
-    }
-
-    h1 span {
-      display: block;
-      color: #1a2e4a;
-    }
-
-
-
-    /* ICÔNES HERO */
-    .hero-icons {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .hero-icon {
-      width: 80px;
-      height: 80px;
-      opacity: 0;
-      animation: dropDown .6s cubic-bezier(.22,.61,.36,1) forwards;
-    }
-
-    .hero-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: invert(1);
-    }
-
-    .hero-icon:nth-child(1) { animation-delay: .8s; }
-    .hero-icon:nth-child(2) { animation-delay: 1.1s; }
-    .hero-icon:nth-child(3) { animation-delay: 1.4s; }
-    .hero-icon:nth-child(4) { animation-delay: 1.7s; }
-
-    @keyframes dropDown {
-      from { opacity: 0; transform: translateY(-40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media(max-width:700px){
-      .hero-icon { width: 55px; height: 55px; }
-      .hero-icons { gap: 1.2rem; }
-    }
-
-    /* ANIMATIONS HERO */
-    @keyframes dropIn {
-      from { opacity: 0; transform: translateY(-60px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .hero-titre {
-      animation: fadeUp .9s ease both;
+    .hero-titre-img {
+      width: clamp(260px, 50vw, 580px);
+      filter: brightness(0) saturate(100%) invert(18%) sepia(50%) saturate(500%) hue-rotate(185deg);
+      margin-bottom: 1.5rem;
+      animation: fadeUp .8s ease both;
       animation-delay: .1s;
     }
 
     .hero-desc {
-      margin-bottom: 2.5rem;
       font-style: italic;
-      color: rgba(0,0,0,.85);
-      max-width: 500px;
-      animation: fadeUp .9s ease both;
-      animation-delay: .4s;
+      color: #666;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      animation: fadeUp .8s ease both;
+      animation-delay: .35s;
     }
 
-    .hero-btn {
-      animation: fadeUp .9s ease both;
-      animation-delay: .7s;
-    }
-
-
-    .btn {
-      background: white;
-      color: var(--bleu);
-      padding: 1rem 2.8rem;
+    .btn-hero {
+      display: inline-block;
+      background: var(--jaune);
+      color: var(--bleu-fonce);
+      padding: 1rem 3rem;
       text-decoration: none;
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: .9rem;
-      letter-spacing: .08em;
+      font-size: .88rem;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      border-radius: 4px;
-      border: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(247,189,45,.35);
       transition: transform .2s, box-shadow .2s;
+      animation: fadeUp .8s ease both;
+      animation-delay: .6s;
+    }
+    .btn-hero:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(247,189,45,.5); }
+
+    /* icônes hero */
+    .hero-icones {
+      display: flex; gap: 2rem;
+      justify-content: center; align-items: center;
+      margin-top: 3rem;
+    }
+    .hero-icone {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--jaune);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; opacity: 0;
+    }
+    .hero-icone img { width: 80%; height: 80%; object-fit: contain; filter: invert(1); }
+    .hero-icone:nth-child(1) { animation: dropIn .5s ease forwards; animation-delay: .9s; }
+    .hero-icone:nth-child(2) { animation: dropIn .5s ease forwards; animation-delay: 1.1s; }
+    .hero-icone:nth-child(3) { animation: dropIn .5s ease forwards; animation-delay: 1.3s; }
+    .hero-icone:nth-child(4) { animation: dropIn .5s ease forwards; animation-delay: 1.5s; }
+
+    /* ── BANDEAU PHOTO ── */
+    .bandeau-photo {
+      width: 100%; height: 520px;
+      overflow: hidden; position: relative;
+    }
+    .bandeau-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 55%;
+    }
+    .bandeau-photo .bandeau-texte {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.28);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bandeau-photo .bandeau-texte p {
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.08);
-    }
-
-    /* SECTION */
+    /* ── SECTIONS ── */
     .section {
-      padding: 7rem 3rem;
-      max-width: 1000px;
+      padding: 6rem 3rem;
+      max-width: 1100px;
       margin: auto;
     }
 
+    .section-center { text-align: center; }
+
     h2 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      margin-bottom: 3rem;
-      color: var(--bleu);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--bleu-fonce);
       letter-spacing: -.02em;
       line-height: 1.2;
+      margin-bottom: .8rem;
     }
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(0,0,0,.07);
+    .section-sous-titre {
+      color: #999;
+      font-size: 1.05rem;
+      font-style: italic;
+      margin-bottom: 4rem;
     }
 
-    .price {
-      font-weight: bold;
-      margin-top: 1rem;
+    /* ── GRILLE PARCOURS ── */
+    .parcours-grille {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .parcours-card {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .parcours-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+
+    .parcours-card .parcours-photo {
+      height: 220px; overflow: hidden;
+    }
+    .parcours-card .parcours-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s;
+    }
+    .parcours-card:hover .parcours-photo img { transform: scale(1.04); }
+
+    .parcours-card .parcours-body {
+      padding: 1.8rem;
+    }
+    .parcours-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      color: var(--bleu-fonce);
+      margin-bottom: .8rem;
+    }
+    .parcours-card p { color: #555; font-size: .95rem; }
+    .parcours-card .price {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
       color: var(--bleu);
+      margin-top: 1.2rem;
+      font-size: 1.1rem;
     }
 
-    /* CAL */
+    .bientot {
+      opacity: .55;
+    }
+    .bientot-badge {
+      display: inline-block;
+      background: var(--jaune);
+      color: var(--bleu-fonce);
+      font-family: 'Syne', sans-serif;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border-radius: 20px;
+      margin-bottom: .8rem;
+    }
+
+    /* ── ICÔNE SECTION ── */
+    .section-icon { margin-bottom: 1.2rem; }
+    .icone-cercle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--jaune);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .icone-cercle img { width: 70%; height: 70%; object-fit: contain; filter: invert(1); }
+
+    /* ── CALENDRIER ── */
     .cal-section {
       padding: 7rem 3rem;
-      background: var(--bleu);
+      background: var(--bleu-fonce);
       color: white;
     }
+    .cal-section h2 { color: white; }
+    .cal-section .section-icon .icone-cercle { background: white; }
+    .cal-section .section-icon .icone-cercle img { filter: none; }
 
-    /* GUIDE */
+    /* ── GUIDE ── */
     .guide {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
       gap: 5rem;
       align-items: center;
     }
-
     .photo {
-      background: var(--jaune);
-      height: 420px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
+      height: 480px; border-radius: 8px;
+      overflow: hidden; background: var(--jaune);
     }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
 
-    .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* ── BANDEAU FINAL ── */
+    .bande-finale {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+      height: 320px;
     }
+    .bande-finale div { overflow: hidden; }
+    .bande-finale img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .bande-finale div:hover img { transform: scale(1.04); }
 
+    /* ── CONTACT ── */
+    .contact-bloc {
+      display: flex; gap: 3rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .contact-info p { margin-bottom: .8rem; }
+    .contact-info a { color: var(--bleu); text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+
+    /* ── MENTIONS ── */
+    .mentions { font-size: .85rem; opacity: .75; }
+    .mentions p { margin-bottom: .4rem; }
+
+    /* ── FOOTER ── */
     footer {
       text-align: center;
-      padding: 3rem 2rem;
-      color: #888;
-      font-size: .85rem;
-      border-top: 1px solid rgba(0,0,0,.07);
-      background: white;
+      padding: 2.5rem;
+      color: #999;
+      font-size: .82rem;
+      background: #fffbe8;
+      border-top: 1px solid rgba(247,189,45,.3);
     }
 
-    @media(max-width:700px){
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media(max-width:800px){
       .guide { grid-template-columns: 1fr; }
+      .parcours-grille { grid-template-columns: 1fr; }
+      .bande-finale { grid-template-columns: 1fr 1fr; height: auto; }
+      .bande-finale div { height: 200px; }
+      .hero-icones { gap: 1rem; }
+      .hero-icone { width: 56px; height: 56px; }
     }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo" style="display:flex; align-items:center; gap:1rem;">
-    <div style="width:200px; height:200px; border-radius:50%; background:#f7bd2d; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;">
-      <img src="logo.png" alt="Logo Le quart d'heure Marseillais" style="width:110%; height:110%; object-fit:contain; filter:invert(1);">
+  <div class="logo-header">
+    <div class="logo-cercle">
+      <img src="logo.png" alt="Logo Le quart d'heure Marseillais">
     </div>
-    <img src="titre.png" alt="Le quart d'heure Marseillais" style="height:140px; width:auto; filter:brightness(0) saturate(100%) invert(25%) sepia(50%) saturate(500%) hue-rotate(185deg);">
+
   </div>
   <nav>
-    <a href="#parcours"><img src="bonne_mere.png" alt="" aria-hidden="true" class="nav-icone">Les parcours</a>
-    <a href="#reserver"><img src="ricard.png" alt="" aria-hidden="true" class="nav-icone">Réserver</a>
-    <a href="#guide"><img src="sardine.png" alt="" aria-hidden="true" class="nav-icone">Qui suis-je</a>
-    <a href="#contact"><img src="voilier.png" alt="" aria-hidden="true" class="nav-icone">Contact</a>
-    <a href="#mentions-legales">Mentions</a>
+    <a href="#parcours"><img src="bonne_mere.png" class="nav-icone" alt="" aria-hidden="true">Les parcours</a>
+    <a href="#reserver"><img src="ricard.png" class="nav-icone" alt="" aria-hidden="true">Réserver</a>
+    <a href="#guide"><img src="sardine.png" class="nav-icone" alt="" aria-hidden="true">Qui suis-je ?</a>
+    <a href="#contact"><img src="voilier.png" class="nav-icone" alt="" aria-hidden="true">Contact</a>
+    <a href="#mentions-legales" style="opacity:.6;">Mentions</a>
   </nav>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <img src="titre.png" alt="Le quart d'heure Marseillais" class="hero-titre" style="width: clamp(280px, 55vw, 620px); filter: brightness(0) invert(1); margin-bottom: 1rem;">
+  <img src="titre.png" alt="Le quart d'heure Marseillais" class="hero-titre-img">
   <p class="hero-desc">Découvrez Marseille autrement — lumineux, vivant, solaire.</p>
-  <div class="hero-icons">
-    <div class="hero-icon"><img src="bonne_mere.png" alt="Notre-Dame de la Garde"></div>
-    <div class="hero-icon"><img src="ricard.png" alt="Ricard"></div>
-    <div class="hero-icon"><img src="sardine.png" alt="Sardine"></div>
-    <div class="hero-icon"><img src="voilier.png" alt="Voilier"></div>
-  </div>
-  <a href="#reserver" class="btn hero-btn">Réserver une visite</a>
+  <a href="#reserver" class="btn-hero">Réserver une visite</a>
   <div class="hero-icones">
     <div class="hero-icone"><img src="bonne_mere.png" alt=""></div>
     <div class="hero-icone"><img src="ricard.png" alt=""></div>
@@ -458,48 +418,78 @@
   </div>
 </section>
 
-<!-- BANDE PHOTO AMBIANCE -->
-<section class="section" style="padding-top:2rem; padding-bottom:2rem;">
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem;">
-    <div class="photo"><img src="IMG_1774.JPG" alt="Coucher de soleil sur Marseille"></div>
-    <div class="photo"><img src="IMG_7422.jpeg" alt="Fort Saint-Jean depuis la mer"></div>
-  </div>
-</section>
-
-<section class="section" id="parcours">
-  <!-- ICÔNE : section Parcours -->
-  <div class="section-icon" id="icone-parcours">
-    <div class="icone-cercle"><img src="bonne_mere.png" alt="" aria-hidden="true"></div>
-  </div>
-  <h2>Nos parcours</h2>
-
-  <div class="card">
-    <div class="photo" style="height:200px; margin-bottom:1.5rem;">
-      <img src="IMG_1778.JPG" alt="Le Panier Marseille">
-    </div>
-    <h3>Le Panier en 2h</h3>
-    <p>Partez à la découverte du plus vieux quartier de Marseille, entre lumière, histoire et points de vue sur la mer.</p>
-    <div class="price">30€ / personne</div>
-  </div>
-</section>
-
-
 <!-- BANDEAU PHOTO PLEIN LARGEUR -->
-<div style="width:100%; height:480px; overflow:hidden; position:relative;">
-  <img src="IMG_0549.JPG" alt="Calanque de Marseille" style="width:100%; height:100%; object-fit:cover; object-position:center 60%;">
-  <div style="position:absolute; inset:0; background:rgba(0,0,0,.3); display:flex; align-items:center; justify-content:center;">
-    <p style="color:white; font-family:'Syne',sans-serif; font-size:clamp(1.2rem,3vw,2rem); letter-spacing:.2em; text-transform:uppercase; text-align:center;">Marseille â 2 600 ans d’histoire</p>
+<div class="bandeau-photo">
+  <img src="IMG_1774.JPG" alt="Coucher de soleil sur Marseille">
+  <div class="bandeau-texte">
+    <p>Marseille — 2 600 ans d'histoire</p>
   </div>
 </div>
 
-<section class="cal-section" id="reserver">
-  <!-- ICÔNE : section Réserver -->
-  <div class="section-icon" id="icone-reserver">
-    <div class="icone-cercle"><img src="ricard.png" alt="" aria-hidden="true"></div>
+<!-- PARCOURS -->
+<section class="section section-center" id="parcours" style="background:linear-gradient(180deg,#fffbe8 0%,white 100%); max-width:100%; padding-left:3rem; padding-right:3rem;">
+  <div class="section-icon" style="display:flex; justify-content:center; margin-bottom:1.5rem;">
+    <div class="icone-cercle"><img src="bonne_mere.png" alt=""></div>
   </div>
-  <h2>Choisissez votre créneau</h2>
-  <div style="width:100%;height:700px;overflow:scroll" id="my-cal-inline"></div>
+  <h2>Nos parcours</h2>
+  <p class="section-sous-titre">1 ville. 2 600 ans d'histoire. Des secrets à chaque coin de rue.</p>
 
+  <div class="parcours-grille">
+    <!-- Parcours 1 -->
+    <div class="parcours-card">
+      <div class="parcours-photo">
+        <img src="IMG_1778.JPG" alt="Le Panier Marseille">
+      </div>
+      <div class="parcours-body">
+        <h3>Le Panier en 2h</h3>
+        <p>Partez à la découverte du plus vieux quartier de Marseille, entre lumière, histoire et points de vue sur la mer.</p>
+        <div class="price">30 € / personne</div>
+      </div>
+    </div>
+
+    <!-- Parcours 2 – bientôt -->
+    <div class="parcours-card bientot">
+      <div class="parcours-photo" style="background:#f0ece4; display:flex; align-items:center; justify-content:center;">
+        <img src="IMG_7422.jpeg" alt="Fort Saint-Jean" style="opacity:.6;">
+      </div>
+      <div class="parcours-body">
+        <span class="bientot-badge">Bientôt</span>
+        <h3>Le Vieux-Port & ses forts</h3>
+        <p>De la Joliette au Fort Saint-Jean, plongez dans 2 600 ans d'histoire maritime et de patrimoine.</p>
+        <div class="price">À venir</div>
+      </div>
+    </div>
+
+    <!-- Parcours 3 – bientôt -->
+    <div class="parcours-card bientot">
+      <div class="parcours-photo" style="background:#f0ece4; display:flex; align-items:center; justify-content:center;">
+        <img src="IMG_1775.JPG" alt="Notre-Dame de la Garde" style="opacity:.6;">
+      </div>
+      <div class="parcours-body">
+        <span class="bientot-badge">Bientôt</span>
+        <h3>De la Bonne Mère à la mer</h3>
+        <p>Montez jusqu'à Notre-Dame de la Garde et redescendez vers la Corniche pour une vue imprenable.</p>
+        <div class="price">À venir</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDEAU CALANQUE -->
+<div class="bandeau-photo" style="height:420px;">
+  <img src="IMG_0549.JPG" alt="Calanque de Marseille" style="object-position: center 60%;">
+  <div class="bandeau-texte">
+    <p>La mer à portée de regard</p>
+  </div>
+</div>
+
+<!-- RÉSERVER -->
+<section class="cal-section" id="reserver">
+  <div class="section-icon" style="margin-bottom:1.5rem;">
+    <div class="icone-cercle"><img src="ricard.png" alt=""></div>
+  </div>
+  <h2 style="margin-bottom:2rem;">Choisissez votre créneau</h2>
+  <div style="width:100%;height:700px;overflow:scroll" id="my-cal-inline"></div>
   <script type="text/javascript">
     (function (C, A, L) {
       let p = function (a, ar) { a.q.push(ar); };
@@ -515,59 +505,55 @@
   </script>
 </section>
 
-<section class="section guide" id="guide">
-  <div class="photo"><img src="Gui.JPG" alt="Guillemette en visite"></div>
+<!-- GUIDE -->
+<section class="section guide" id="guide" style="background:#fffbe8; max-width:100%; padding-left:6rem; padding-right:6rem;">
+  <div class="photo">
+    <img src="Gui.JPG" alt="Guillemette en visite">
+  </div>
   <div>
-    <!-- ICÔNE : section Guillemette -->
-    <div class="section-icon" id="icone-guide">
-      <div class="icone-cercle"><img src="sardine.png" alt="" aria-hidden="true"></div>
+    <div class="section-icon">
+      <div class="icone-cercle"><img src="sardine.png" alt=""></div>
     </div>
-    <h2>Guillemette <span style="color:#f7bd2d; font-family:'Syne', sans-serif;">?</span></h2>
+    <h2>Guillemette <span style="color:var(--jaune);">?</span></h2>
     <p>Après une enfance sous le soleil de Marseille, j'ai étudié l'histoire de l'Art à l'École du Louvre et à La Sorbonne. Je vous emmène visiter mon Marseille : chargé d'histoire et de patrimoine, mais surtout authentique et chaleureux.</p>
   </div>
 </section>
 
-<!-- BANDE PHOTO FINALE -->
-<section class="section" style="padding-top:2rem; padding-bottom:4rem;">
-  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:.5rem;">
-    <div class="photo"><img src="IMG_1775.JPG" alt="Notre-Dame de la Garde"></div>
-    <div class="photo"><img src="IMG_0549.JPG" alt="Calanque et pont"></div>
-    <div class="photo"><img src="IMG_7422.jpeg" alt="Fort Saint-Jean"></div>
+<!-- BANDE PHOTOS FINALE -->
+<div class="bande-finale">
+  <div><img src="IMG_1775.JPG" alt="Notre-Dame de la Garde"></div>
+  <div><img src="IMG_7422.jpeg" alt="Fort Saint-Jean"></div>
+  <div><img src="IMG_1778.JPG" alt="Le Panier"></div>
+</div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-icon">
+    <div class="icone-cercle"><img src="voilier.png" alt=""></div>
+  </div>
+  <h2 style="margin-bottom:1.5rem;">Contact</h2>
+  <div class="contact-info">
+    <p>N'hésitez pas à me contacter pour toute question ou pour réserver une visite.</p>
+    <p style="margin-top:1.5rem;">📧 <a href="mailto:guillemette.bouzereau@gmail.com">guillemette.bouzereau@gmail.com</a></p>
+    <p style="margin-top:.5rem;">📞 <a href="tel:+33782544588">07 82 54 45 88</a></p>
+    <p style="margin-top:1rem; font-size:.85rem; opacity:.65;">Je vous réponds généralement sous 24 à 48h.</p>
   </div>
 </section>
 
 <!-- MENTIONS LÉGALES -->
-<section class="section" id="mentions-legales" style="padding-top:3rem; padding-bottom:3rem; font-size:.85rem; opacity:.8;">
-  <h2>Mentions légales</h2>
+<section class="section mentions" id="mentions-legales" style="padding-top:2rem; padding-bottom:3rem;">
+  <h2 style="font-size:1.3rem; margin-bottom:1rem;">Mentions légales</h2>
   <p><strong>Nom du site :</strong> Le quart d'heure Marseillais</p>
-  <p><strong>Responsable de publication :</strong> Guillemette Bouzereau</p>
+  <p><strong>Responsable :</strong> Guillemette Bouzereau</p>
   <p><strong>Statut :</strong> Auto-entrepreneur</p>
-  <p><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d7c5d9dcdcd5ddd5c4c4d59ed2dfc5cad5c2d5d1c5f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</a></p>
+  <p><strong>Email :</strong> guillemette.bouzereau@gmail.com</p>
   <p><strong>Hébergement :</strong> GitHub</p>
-  <p>
-    Les informations présentes sur ce site sont fournies à titre indicatif. Toute reproduction, distribution ou utilisation sans autorisation est interdite.
-  </p>
-</section>
-
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <!-- ICÔNE : section Contact -->
-  <div class="section-icon" id="icone-contact">
-    <div class="icone-cercle"><img src="voilier.png" alt="" aria-hidden="true"></div>
-  </div>
-  <h2>Contact</h2>
-  <p style="margin-bottom:1.5rem;">N'hésitez pas à me contacter pour toute question ou pour réserver une visite.</p>
-  <p style="margin-bottom:.75rem;">
-    📧 <a href="mailto:guillemette.bouzereau@gmail.com" style="color:var(--bleu);">guillemette.bouzereau@gmail.com</a>
-  </p>
-  <p>
-    📞 <a href="tel:+33782544588" style="color:var(--bleu);">07 82 54 45 88</a>
-  </p>
-  <p style="margin-top:1rem; font-size:.85rem; opacity:.7;">Je vous réponds généralement sous 24 à 48h.</p>
+  <p style="margin-top:.8rem;">Les informations présentes sur ce site sont fournies à titre indicatif. Toute reproduction sans autorisation est interdite.</p>
 </section>
 
 <footer>
-  © 2026 — Le quart d'heure Marseillais · <a href="#mentions-legales" style="color:inherit; text-decoration:underline;">Mentions légales</a>
+  © 2026 — Le quart d'heure Marseillais ·
+  <a href="#mentions-legales" style="color:inherit; text-decoration:underline;">Mentions légales</a>
 </footer>
 
 <script>
