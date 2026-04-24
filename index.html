@@ -44,7 +44,7 @@
     }
 
     .logo-cercle {
-      width: 90px; height: 90px;
+      width: 130px; height: 130px;
       border-radius: 50%;
       background: var(--jaune);
       display: flex; align-items: center; justify-content: center;
@@ -60,7 +60,7 @@
     nav { display: flex; align-items: center; }
 
     nav a {
-      margin-left: .6rem;
+      margin-left: .5rem;
       text-decoration: none;
       font-family: 'Syne', sans-serif;
       font-size: .72rem;
@@ -69,17 +69,17 @@
       color: var(--bleu-fonce);
       display: inline-flex;
       align-items: center;
-      gap: .35rem;
-      padding: .5rem 1rem;
+      gap: .45rem;
+      padding: .55rem 1.1rem;
       border-radius: 30px;
-      border: 1.5px solid rgba(123,172,202,.35);
-      background: rgba(255,255,255,.8);
-      transition: background .2s, border-color .2s, color .2s;
+      border: 1.5px solid var(--jaune);
+      background: var(--jaune);
+      transition: background .2s, box-shadow .2s;
     }
     nav a:hover {
-      background: var(--jaune);
-      border-color: var(--jaune);
-      color: var(--bleu-fonce);
+      background: #f0b020;
+      border-color: #f0b020;
+      box-shadow: 0 4px 12px rgba(247,189,45,.4);
     }
     nav a:last-child {
       border-color: transparent;
@@ -88,8 +88,9 @@
     }
 
     .nav-icone {
-      width: 18px; height: 18px;
+      width: 26px; height: 26px;
       object-fit: contain;
+      filter: invert(0);
     }
 
     /* hamburger */
@@ -132,8 +133,8 @@
     }
 
     .hero-titre-img {
-      width: clamp(260px, 50vw, 580px);
-      filter: brightness(0) saturate(100%) invert(18%) sepia(50%) saturate(500%) hue-rotate(185deg);
+      width: clamp(220px, 35vw, 420px);
+      filter: invert(1);
       margin-bottom: 1.5rem;
       animation: fadeUp .8s ease both;
       animation-delay: .1s;
@@ -407,7 +408,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <img src="titre.png" alt="Le quart d'heure Marseillais" class="hero-titre-img">
+  <img src="logo.png" alt="Le quart d'heure Marseillais" class="hero-titre-img">
   <p class="hero-desc">Découvrez Marseille autrement — lumineux, vivant, solaire.</p>
   <a href="#reserver" class="btn-hero">Réserver une visite</a>
   <div class="hero-icones">
@@ -454,8 +455,8 @@
       </div>
       <div class="parcours-body">
         <span class="bientot-badge">Bientôt</span>
-        <h3>Le Vieux-Port & ses forts</h3>
-        <p>De la Joliette au Fort Saint-Jean, plongez dans 2 600 ans d'histoire maritime et de patrimoine.</p>
+        <h3>Marseille Littéraire</h3>
+        <p>Promenez-vous dans le temps et les lieux comme l'ont fait les grands écrivains.</p>
         <div class="price">À venir</div>
       </div>
     </div>
@@ -467,8 +468,8 @@
       </div>
       <div class="parcours-body">
         <span class="bientot-badge">Bientôt</span>
-        <h3>De la Bonne Mère à la mer</h3>
-        <p>Montez jusqu'à Notre-Dame de la Garde et redescendez vers la Corniche pour une vue imprenable.</p>
+        <h3>Les Saints Marseillais</h3>
+        <p>Plongez dans l'histoire du christianisme en Provence avec les saints qui ont fait la ville.</p>
         <div class="price">À venir</div>
       </div>
     </div>
